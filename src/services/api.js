@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // Configuração padrão do Axios
 const instance = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: 'https://respostamercadolivre-production.up.railway.app',
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
