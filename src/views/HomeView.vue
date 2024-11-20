@@ -15,17 +15,10 @@
       />
     </el-select>
 
-    <!-- Botão para adicionar conta do Mercado Livre -->
-    <el-button type="primary" @click="adicionarContaMercadoLivre" style="margin-bottom: 20px;">
-      Adicionar Conta do Mercado Livre
-    </el-button>
 
     <!-- Tabela de Perguntas para o Usuário Selecionado -->
     <div v-if="selectedUser" style="margin-top: 40px;">
       <h3>Perguntas para {{ user.first_name }}</h3>
-      <el-button type="danger" @click="desvincularConta(selectedUser)" style="margin-bottom: 10px;">
-        Desvincular Conta
-      </el-button>
       <el-table :data="user.perguntas" border style="width: 100%">
         <el-table-column prop="text" label="Pergunta" />
         <el-table-column label="Status" width="120">
@@ -164,7 +157,15 @@ export default {
       const newUser = await MercadoLivreService.obterToken(this.code);
       const details = await MercadoLivreService.getUserInfo(newUser.access_token)
       const dados = Object.assign({}, newUser, details);
+      if (this.usuarios.filter(user => user.user_id === dados.user_id).length===0){
       this.usuarios.push(dados);
+      }
+      else{
+        this.$message({
+        message: 'A conta ja existe',
+        type: 'error',
+      });
+      }
       for (let user of this.usuarios) {
       const perguntas = await MercadoLivreService.getQuestions(user);
       this.$set(user, 'perguntas', perguntas.questions || []);
