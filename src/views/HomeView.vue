@@ -171,6 +171,7 @@ export default {
       this.$set(user, 'perguntas', perguntas.questions || []);
       }
       localStorage.setItem("users", JSON.stringify(this.usuarios));
+      console.log(this.$router);
       this.$router.push("/")
     } else{
     for (let user of this.usuarios) {

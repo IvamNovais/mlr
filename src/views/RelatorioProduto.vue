@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Barra de Seleção -->
-    <el-row gutter="20" style="margin-bottom: 20px">
-      <el-col :span="12">
+    <el-row :gutter="20" style="margin-bottom: 20px">
+      <el-col :span="24" :sm="12" :md="12">
         <!-- Selecionar o usuário -->
         <el-select
           @change="buscaProdutos"
@@ -19,24 +19,24 @@
         </el-select>
       </el-col>
 
-      <el-col :span="12">
+      <el-col :span="24" :sm="12" :md="12">
         <!-- Selecionar o produto -->
-         <div v-loading="trazProduto">
-        <el-select
-          v-if="user.user_id"
-          @change="buscaPedidos"
-          v-model="produto.id"
-          placeholder="Selecione um produto"
-          class="select-style"
-        >
-          <el-option
-            v-for="produto in produtos"
-            :key="produto.id"
-            :label="produto.title"
-            :value="produto.id"
-          />
-        </el-select>
-      </div>
+        <div v-loading="trazProduto">
+          <el-select
+            v-if="user.user_id"
+            @change="buscaPedidos"
+            v-model="produto.id"
+            placeholder="Selecione um produto"
+            class="select-style"
+          >
+            <el-option
+              v-for="produto in produtos"
+              :key="produto.id"
+              :label="produto.title"
+              :value="produto.id"
+            />
+          </el-select>
+        </div>
       </el-col>
     </el-row>
 
@@ -46,7 +46,7 @@
         <el-button v-if="faltaSku" @click="gerarSku">Gerar sku</el-button>
         <el-row :gutter="20">
           <!-- Coluna da Tabela de Visitas -->
-          <el-col :span="12">
+          <el-col :span="24" :sm="12" :md="12">
             <table v-if="visitsData.total_visits > 0" class="visits-table">
               <thead>
                 <tr>
@@ -78,7 +78,7 @@
           </el-col>
 
           <!-- Coluna do Relatório de Visitas -->
-          <el-col :span="12">
+          <el-col :span="24" :sm="12" :md="12">
             <div v-if="visitsData.item_id">
               <h1>Relatório de Visitas</h1>
               <p><strong>Total de Visitas:</strong> {{ visitsData.total_visits }}</p>
@@ -89,8 +89,8 @@
         </el-row>
 
         <!-- Outras informações adicionais de faturamento e pedidos -->
-        <el-row gutter="20" style="margin-top: 20px">
-          <el-col span="12">
+        <el-row :gutter="20" style="margin-top: 20px">
+          <el-col :span="24" :sm="12" :md="12">
             <div v-if="relatorioGeral">
               <h1>Relatório Geral</h1>
               <p><strong>Vendas Brutas:</strong> {{ relatorioGeral.vendasBrutas }}</p>
@@ -112,7 +112,8 @@
               </p>
             </div>
           </el-col>
-          <el-col span="12">
+
+          <el-col :span="24" :sm="12" :md="12">
             <div v-if="faturamentoData">
               <h1>Relatório de Faturamento</h1>
               <p>
@@ -178,6 +179,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import MercadoLivreService from "@/services/mercadoLivreService";

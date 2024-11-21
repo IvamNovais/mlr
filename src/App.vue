@@ -2,7 +2,7 @@
   <div id="app">
     <!-- Cabeçalho -->
     <el-header class="header">
-      <el-row gutter="20" type="flex" justify="start" align="middle">
+      <el-row :gutter="20" type="flex" justify="start" align="middle">
         <!-- Botão Hamburger -->
         <el-col :span="2">
           <el-button
@@ -26,8 +26,10 @@
         </el-col>
       </el-row>
     </el-header>
+    <div class="content">
+      <router-view />
+    </div>
 
-    <!-- Card Lateral (Drawer) -->
     <el-drawer
       title="Contas"
       :visible.sync="drawerVisible"
@@ -49,10 +51,6 @@
     </div>
     </el-drawer>
 
-    <!-- Espaçamento de Conteúdo -->
-    <div class="content">
-      <router-view />
-    </div>
   </div>
 </template>
 
@@ -65,16 +63,12 @@ export default {
       activeLink: '1', // Define o link ativo inicial
     };
   },
-  async mounted() {
-    this.code = this.$route.query.code;
-    this.usuarios = JSON.parse(localStorage.getItem("users")) || [];
-    localStorage.setItem("users", JSON.stringify(this.usuarios));
-  },
   methods: {
     handleSelect(index) {
       this.activeLink = index; // Atualiza o link ativo quando um item for selecionado
     },
     toggleDrawer() {
+      this.usuarios = JSON.parse(localStorage.getItem("users")) || [];
       this.drawerVisible = !this.drawerVisible; // Alterna a visibilidade do drawer
     },
     adicionarContaMercadoLivre() {
@@ -123,7 +117,7 @@ export default {
 /* Estilos para o conteúdo abaixo do cabeçalho */
 .content {
   padding: 20px;
-  margin-top: 20px; /* Espaçamento entre o cabeçalho e o conteúdo */
+  margin-top: 40px; /* Espaçamento entre o cabeçalho e o conteúdo */
 }
 .contas{
   padding: 25px;
